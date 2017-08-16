@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans.xsd
+	http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context.xsd
+	http://www.springframework.org/schema/aop
+	http://www.springframework.org/schema/aop/spring-aop.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+	<!-- Spring框架读取外部的properties文件 -->
+	<context:property-placeholder location="classpath:db.properties"/>	
+
+	<bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+		<property name="jdbcUrl" value="${jdbc.url}"/>
+		<property name="driverClass" value="${jdbc.driverClass}"/>
+		<property name="user" value="${jdbc.user}"/>
+		<property name="password" value="${jdbc.password}"/>
+		<property name="initialPoolSize" value="${c3p0.minSize}"/>
+		<property name="maxPoolSize" value="${c3p0.maxSize}"/>
+		<property name="checkoutTimeout" value="${c3p0.timeout}"/>
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+		<!-- 数据源 -->
+		<property name="dataSource" ref="dataSource" />
+		<!-- Hibernate的扩展信息 -->
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.format_sql">true</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+		<!-- 映射文件的路径列表 -->
+		<property name="mappingResources">
+			<list>
+				<value>cn/itcast/crm/entity/Customer.hbm.xml</value>
+				<value>cn/itcast/crm/entity/Linkman.hbm.xml</value>
+				<value>cn/itcast/crm/entity/User.hbm.xml</value>
+			</list>
+		</property>
+	</bean>
+
+	<!-- 配置声明式事务处理 -->
+	<!-- 平台事务管理器的实现 -->
+	<bean id="transactionManager"
+		class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+	<!-- 配置事务通知-->
+	<tx:advice id="txAdvice" transaction-manager="transactionManager">
+		<!-- 事务属性 -->
+		<tx:attributes>
+			<tx:method name="save*" />
+			<tx:method name="update*" />
+			<tx:method name="delete*" />
+			<tx:method name="find*" read-only="true" />
+			<tx:method name="*" />
+		</tx:attributes>
+	</tx:advice>
+
+
+	<!-- 事务切面配置 -->
+	<aop:config>
+		<!-- 切入点 -->
+		<aop:pointcut expression="execution(* cn.itcast.crm.biz.impl.*Biz.*(..))" id="txPointcut" />
+		<!-- 切面 -->
+		<aop:advisor advice-ref="txAdvice" pointcut-ref="txPointcut" />
+	</aop:config>
+	
+	
+	<!-- 导入其他applicationContext文件 -->
+	<!-- <import resource="classpath:applicationContext-*.xml"/> -->
+	<import resource="classpath:spring/applicationContext-dao.xml"/>
+	<import resource="classpath:spring/applicationContext-biz.xml"/>
+	<import resource="classpath:spring/applicationContext-action.xml"/>
+
+</beans>

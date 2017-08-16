@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE validators PUBLIC
+  		"-//Apache Struts//XWork Validator 1.0.3//EN"
+  		"http://struts.apache.org/dtds/xwork-validator-1.0.3.dtd">
+  		
+ <validators>
+ 	<!-- 属性名称 -->	
+ 	<field name="custName">
+ 		<!-- 验证规则 -->
+ 		<field-validator type="requiredstring">
+ 			<!-- 提示信息 -->
+ 			<!-- 
+ 			key: 读取messages.propertes文件的内容
+ 			 -->
+ 			<message key="custName.requreid"/>
+ 		</field-validator>
+ 	</field>
+ 
+ 	<field name="custLevel">
+ 		<!-- 验证规则 -->
+ 		<field-validator type="requiredstring">
+ 			<!-- 提示信息 -->
+ 			<!-- 
+ 			key: 读取messages.propertes文件的内容
+ 			 -->
+ 			<message key="custLevel.requreid"/>
+ 		</field-validator>
+ 	</field>
+ 	
+ 	<field name="custMobile">
+ 		<!-- 验证规则 -->
+ 		<field-validator type="requiredstring">
+ 			<!-- 提示信息 -->
+ 			<!-- 
+ 			key: 读取messages.propertes文件的内容
+ 			 -->
+ 			<message key="custMobile.requreid"/>
+ 		</field-validator>
+ 	</field>
+ 	
+ 
+ </validators> 		

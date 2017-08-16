@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+	<!-- 开发者模式：-->
+    <constant name="struts.devMode" value="true" />
+	<!-- 主题样式 ：默认xhtml-->
+	<constant name="struts.ui.theme" value="simple"/>
+	<!-- 不用重启服务器 -->
+	<constant name="struts.i18n.reload" value="true"/>
+	<constant name="struts.configuration.xml.reload" value="true"/>
+	<!-- 加载classpath下的资源文件 -->
+    <constant name="struts.custom.i18n.resources" value="messages"></constant>
+    
+	<package name="default" namespace="/" extends="json-default">
+	 	<!-- 客户模块 -->
+	 	<action name="customer_*" class="customerAction" method="{1}">
+	 		<result>/views/main/info.jsp</result>
+	 		<result name="saveInput">/views/main/customer/save.jsp</result>
+	 		<result name="updateInput">/views/main/customer/update.jsp</result>
+	 		<result name="list">/views/main/customer/list.jsp</result>
+	 		<result name="update">/views/main/customer/update.jsp</result>
+	 		<result name="json" type="json">
+	 			<param name="root">result</param>
+	 		</result>
+	 	</action>
+	 	<!-- 联系人模块 -->
+	 	<action name="linkman_*" class="linkmanAction" method="{1}">
+	 		<result>/views/main/info.jsp</result>
+	 		<result name="saveInput">/views/main/linkman/save.jsp</result>
+	 		<result name="updateInput">/views/main/linkman/update.jsp</result>
+	 		<result name="list">/views/main/linkman/list.jsp</result>
+	 		<result name="update">/views/main/linkman/update.jsp</result>
+	 	</action>
+	 	<!-- 系统用户模块 -->
+	 	<action name="user_*" class="userAction" method="{1}">
+	 		<result>/views/main/info.jsp</result>
+	 		<result name="saveInput">/views/main/user/save.jsp</result>
+	 		<result name="updateInput">/views/main/user/update.jsp</result>
+	 		<result name="list">/views/main/user/list.jsp</result>
+	 		<result name="update">/views/main/user/update.jsp</result>
+	 		<result name="json" type="json">
+	 			<param name="root">result</param>
+	 		</result>
+	 	</action>
+	</package>
+</struts>

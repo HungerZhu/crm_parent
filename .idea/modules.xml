@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/crm_action/crm_action.iml" filepath="$PROJECT_DIR$/crm_action/crm_action.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crm_dao/crm_dao.iml" filepath="$PROJECT_DIR$/crm_dao/crm_dao.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crm_entity/crm_entity.iml" filepath="$PROJECT_DIR$/crm_entity/crm_entity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crm_exceptions/crm_exceptions.iml" filepath="$PROJECT_DIR$/crm_exceptions/crm_exceptions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crm_parent.iml" filepath="$PROJECT_DIR$/crm_parent.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crm_service/crm_service.iml" filepath="$PROJECT_DIR$/crm_service/crm_service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/crm_utils/crm_utils.iml" filepath="$PROJECT_DIR$/crm_utils/crm_utils.iml" />
+    </modules>
+  </component>
+</project>
